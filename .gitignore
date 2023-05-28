@@ -1,3 +1,53 @@
 node_modules
 .env
-train.js
+.train.js
+const train = require(./train.js)
+
+
+/** CHALLENGE: MAX PROFIT */
+// const prices = [2, 20, 3, 10, 1 ];
+// console.log("You should buy stock =>", buyStock(prices));
+
+// function buyStock(stock_prices) {
+//       let maxNumber = Math.max.apply(null, stock_prices);
+//       let minNumber = Math.min.apply(null, stock_prices);
+
+//      for (let i = 0; i < stock_prices.length; i++) {
+//        if (stock_prices[i] < stock_prices[minNumber]) {
+//          minNumber = i;
+//        }
+//        if (stock_prices[i] < stock_prices[maxNumber]) {
+//          maxNumber = i;
+//        }
+//      }
+//     return `{ index: ${minNumber}, profit: ${maxNumber - stock_prices[minNumber]} }`;
+// };
+
+// ***************************************************************************
+
+// const prices = [5, 5, 4, 50, 2, 10];
+
+// function buyStock(stockPrices) {
+//   let maxNumber = Math.max(...stockPrices);
+//   let maxSubstraction = null;
+//   let maxSubstractionIndex = null;
+
+//   for (let i = 0; i < stockPrices.length; i++) {
+//     let substract = maxNumber - stockPrices[i];
+//     console.log(substract);
+    
+//     let num = stockPrices[i];
+//     if (num >= maxNumber) {
+//       break;
+//     }
+
+//     if (substract > maxSubstraction) {
+//       maxSubstraction = substract;
+//       maxSubstractionIndex = i;
+//     }
+//   }
+//   return `index:${maxSubstractionIndex} profit:${maxSubstraction}`;
+// }
+
+// let res = buyStock(prices);
+// console.log("You should buy", res);
