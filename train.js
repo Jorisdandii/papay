@@ -1,1 +1,3 @@
-console.log("Task bajarishni boshladik")
+console.log("Task bajarishni boshladik");
+
+

@@ -1,3 +1,5 @@
+
+
 // ************** Dean & Belli *** 2023.05.27 *****************
 // Integral son berilgan bo‘lsa, uning kvadrat son ekanligini aniqlang:
 // n darajali nonlarni topish: n = 2;
@@ -13,5 +15,5 @@ function isSquare_1(n) {
   return Number.isInteger(Math.sqrt(n));
 }
 
-let result1 = isSquare_1(9)
+let result1 = isSquare_1(9);
 console.log(result1);
