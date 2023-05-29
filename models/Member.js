@@ -1,5 +1,34 @@
+const MemberModel = require("../schema/member.model");
+const Definer = require("../lib/mistake");
+
 class Member {
-    constructor() {}
-}
+    constructor() {
+        this.MemberModel = MemberModel;
+    }
+
+    async siggnupData(input) {
+        try {
+          const new_member = new this.MemberModel(input);
+          
+          let result;
+
+          try {
+             result = await new_member.save();
+            } catch (mongo_err) {
+                console.log(mongo_err);
+             throw new Error(Definer.auth_err1);     
+            }
+
+          result.mb_password = "";
+          return result;
+        } catch(err) {
+        throw err;
+        }
+    }
+
+    
+
+
+};
 
 module.exports = Member;
