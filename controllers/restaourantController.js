@@ -70,6 +70,17 @@ restaourantController.logout = (req, res) => {
   res.send("logout sahifadasiz");
 };
 
+restaourantController.validateAuthRestaurant = (req, res, next) => {
+  if (req.session?.member?.mb_type === "RESTAURANT") {
+    req.memebr = req.session.member;
+    next();
+  } else
+    res.json({
+      state: "fail",
+      message: "only authenticated members with restaurant type",
+    });
+};
+
 restaourantController.checkSessions = (req, res) => {
   if (req.session?.member) {
     res.json({ state: "succeed", data: req.session.member });
