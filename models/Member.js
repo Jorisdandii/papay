@@ -8,7 +8,7 @@ class Member {
     this.MemberModel = MemberModel;
   }
 
-  async siggnupData(input) {
+  async signupData(input) {
     try {
       const salt = await bcrypt.genSalt();
       input.mb_password = await bcrypt.hash(input.mb_password, salt);
@@ -27,7 +27,7 @@ class Member {
     } catch (err) {
       throw err;
     }
-  }
+  };
 
   async loginData(input) {
     try {
@@ -52,7 +52,7 @@ class Member {
     } catch (err) {
       throw err;
     } 
-  }
+  };
 }
 
 module.exports = Member;
