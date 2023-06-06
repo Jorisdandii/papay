@@ -1,19 +1,29 @@
-console.log("Task bajarishni boshladik");
+/** F-Task: Shunday function tuzing, unga string argument pass bolsin.
+ *  Function ushbu agrumentdagi faqat digitlarni yangi stringda return qilsin! */
 
+/**  Masalan: findDigits('ad5we34jkf89')
+ * return qilishi kerak bolgan qiymat '53489' */
 
-let arr = [200,12, 23, null, 34, null, 32, null];
-let filteredNum = arr.filter((value) => value !== null).sort((a, b) => a - b);
-let filteredNull = arr.filter((value) => value === null).map((value) => value);
-let result = filteredNum.concat(filteredNull);
-
-console.log(result);
-
-const detail_list = [ 12, 23, null, 32, null, 34, null, null];
-const result1 = moveNullsKeepOeder(detail_list);
-console.log("result:", result1);
-
-
-function moveNullsKeepOeder(detail_list) {
-  let sortNull = detail_list.sort((a,b) => a - b);
-  return sortNull.sort()
+//  1 - usul
+const findDigits1 = (ele) => {
+  let number = "";
+  for (let i = 1; i < ele.length; i++) {
+    if (!isNaN(ele[i])) number += ele[i];
+  }
+  return Number(number);
 };
+
+const result1 = findDigits1("ad5we34jkf89");
+console.log(result1);
+
+// **********************************************
+
+//  2 - usul
+const findDigits = (ele) => {
+  let numberArr = ele.split("").filter((value) => !isNaN(value));
+  let number = numberArr.join("");
+  return Number(number);
+};
+
+const result = findDigits("ad5we34jkf89");
+console.log(result);
