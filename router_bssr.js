@@ -17,7 +17,7 @@ router_bssr
 router_bssr.get("/logout", restaourantController.logout);
 router_bssr.get("/check-me", restaourantController.checkSessions);
 
-router_bssr.get("/products/menu", restaourantController.getMyRestaurantData);
+router_bssr.get("/products/menu", restaourantController.getMyRestauranProducts);
 router_bssr.post(
   "/products/create",
   restaourantController.validateAuthRestaurant,
