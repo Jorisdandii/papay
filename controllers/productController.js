@@ -1,29 +1,45 @@
+const Product = require("../models/Product");
+const assert = require("assert");
+const Definer = require("../lib/mistake");
+
 let productController = module.exports;
 
 productController.getAllProducts = async (req, res) => {
   try {
     console.log("GET: cont/getAllProducts");
   } catch (err) {
-    console.log(`ERROR cont/getAllProducts ${err.message}`);
+    console.log(`ERROR cont/getAllProducts, ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };
 
-productController.addNewProducts = async (req, res) => {
+productController.addNewProduct = async (req, res) => {
   try {
-    console.log("POST: cont/addNewProducts");
-    // TODO product creation develop
+    console.log("POST: cont/addNewProduct");
+    assert(req.files, Definer.general_err3);
 
-    res.send("ok")
-} catch (err) {
-    console.log(`ERROR cont/addNewProducts ${err.message}`);
+    const product = new Product();
+    let data = req.body;
+
+    data.product_images = req.files.map((ele) => {
+      return ele.path;
+    });
+
+    const result = await product.addNewProductData(data, req.member);
+
+    const html = `<script>alert(new dusg added successfully);
+                  window.location.replace('/resto/products/menu);
+                  </script>`;
+    res.end(html);
+  } catch (err) {
+    console.log(`ERROR, cont/addNewProduct, ${err.message}`);
   }
 };
 
-productController.updateChosenProducts = async (req, res) => {
+productController.updateChosenProduct = async (req, res) => {
   try {
-    console.log("POST: cont/updateChosenProducts");
+    console.log("POST: cont/updateChosenProduct");
   } catch (err) {
-    console.log(`ERROR cont/updateChosenProducts ${err.message}`);
+    console.log(`ERROR, cont/updateChosenProduct, ${err.message}`);
   }
 };

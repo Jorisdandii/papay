@@ -72,7 +72,7 @@ restaourantController.logout = (req, res) => {
 
 restaourantController.validateAuthRestaurant = (req, res, next) => {
   if (req.session?.member?.mb_type === "RESTAURANT") {
-    req.memebr = req.session.member;
+    req.member = req.session.member;
     next();
   } else
     res.json({
