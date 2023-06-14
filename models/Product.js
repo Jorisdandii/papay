@@ -34,7 +34,7 @@ class Product {
       throw err;
     }
   }
-
+ 
   async updateChosenProductData(id, updated_data, mb_id) {
     try {
       id = shapeIntoMongooseObjectId(id);

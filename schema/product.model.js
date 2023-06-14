@@ -58,7 +58,7 @@ const productSchema = new mongoose.Schema(
       required: function () {
         return this.product_collection === "drink";
       },
-      enum: {
+      enum: { 
         values: product_volume_enums,
         message: "{VALUE} is not among permitted enum values",
       },
@@ -69,7 +69,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: false,
       default: 0,
-    },
+    }, 
     product_views: {
       type: Number,
       required: false,
