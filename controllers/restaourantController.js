@@ -11,7 +11,7 @@ restaourantController.home = (req, res) => {
     console.log(`ERROR cont/home ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
-}
+}   
 
 restaourantController.getMyRestauranProducts = async (req, res) => {
   try {
@@ -99,4 +99,5 @@ restaourantController.checkSessions = (req, res) => {
   } else {
     res.json({ state: "fail", message: "You are not authenticated" });
   }
-};
+}; 
+   
