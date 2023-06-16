@@ -5,14 +5,14 @@ const bcrypt = require("bcryptjs")
 
 class Member {
   constructor() {
-    this.MemberModel = MemberModel;
+    this.memberModel = MemberModel;
   }
 
   async signupData(input) {
     try {
       const salt = await bcrypt.genSalt();
       input.mb_password = await bcrypt.hash(input.mb_password, salt);
-      const new_member = new this.MemberModel(input);
+      const new_member = new this.memberModel(input);
 
       let result;
       try {
@@ -31,7 +31,7 @@ class Member {
 
   async loginData(input) {
     try {
-      const member = await this.MemberModel.findOne(
+      const member = await this.memberModel.findOne(
         { mb_nick: input.mb_nick },
         { mb_nick: 1, mb_password: 1 }
       ).exec();
@@ -44,7 +44,7 @@ class Member {
         );
       assert.ok(isMatch, Definer.auth_err4); 
 
-      return await this.MemberModel
+      return await this.memberModel
       .findOne({
         mb_nick: input.mb_nick,
       })
