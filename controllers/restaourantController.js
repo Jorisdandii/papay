@@ -23,8 +23,8 @@ restaourantController.getMyRestauranProducts = async (req, res) => {
     console.log(`ERROR cont/getMyRestauranProducts ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
-};
-
+};  
+   
 restaourantController.getSignupMyRestaourant = async (req, res) => {
   try {
     console.log("GET: cont/getSignupMyRestaourant");
@@ -33,15 +33,15 @@ restaourantController.getSignupMyRestaourant = async (req, res) => {
     console.log(`ERROR cont/getSignupMyRestaourant ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
-};
+};       
 
 restaourantController.signupProcess = async (req, res) => {
   try {
     console.log("POST: cont/signupProcess");
     const data = req.body,
       member = new Member(),
-      new_member = await member.signupData(data); 
-  
+      new_member = await member.signupData(data);
+
     req.session.member = new_member;
     res.redirect("/resto/products/menu");
   } catch (err) {
