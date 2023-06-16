@@ -5,13 +5,13 @@ let restaourantController = module.exports;
 
 restaourantController.home = (req, res) => {
   try {
-    console.log('GET: cont/home');
-    res.render('home-page');
-  } catch(err) {
+    console.log("GET: cont/home");
+    res.render("home-page");
+  } catch (err) {
     console.log(`ERROR cont/home ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
-}   
+};
 
 restaourantController.getMyRestauranProducts = async (req, res) => {
   try {
@@ -37,15 +37,15 @@ restaourantController.getSignupMyRestaourant = async (req, res) => {
 
 restaourantController.signupProcess = async (req, res) => {
   try {
-    console.log("POST: cont/signup");
+    console.log("POST: cont/signupProcess");
     const data = req.body,
       member = new Member(),
-      new_member = await member.signupData(data);
-
+      new_member = await member.signupData(data); 
+  
     req.session.member = new_member;
     res.redirect("/resto/products/menu");
   } catch (err) {
-    console.log(`ERROR cont/signup ${err.message}`);
+    console.log(`ERROR cont/signupProcess ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };
@@ -62,17 +62,19 @@ restaourantController.getLoginMyRestaourant = async (req, res) => {
 
 restaourantController.loginProcess = async (req, res) => {
   try {
-    console.log("POST: cont/login");
+    console.log("POST: cont/loginProcess");
     const data = req.body,
       member = new Member(),
       result = await member.loginData(data);
 
     req.session.member = result;
     req.session.save(function () {
-      res.redirect("/resto/products/menu");
+      result.mb_type === "ADMIN"
+        ? res.redirect("/resto/all-restaurant")
+        : res.redirect("/resto/products/menu");
     });
   } catch (err) {
-    console.log(`ERROR cont/login ${err.message}`);
+    console.log(`ERROR cont/loginProcess ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };
@@ -99,5 +101,4 @@ restaourantController.checkSessions = (req, res) => {
   } else {
     res.json({ state: "fail", message: "You are not authenticated" });
   }
-}; 
-   
+};
