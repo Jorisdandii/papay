@@ -7,8 +7,8 @@ let restaourantController = module.exports;
 
 restaourantController.home = (req, res) => {
   try {
-    console.log("GET: cont/home");
-    res.render("home-page");
+    console.log("GET: cont/home"); 
+    res.render("home-page"); 
   } catch (err) {
     console.log(`ERROR cont/home ${err.message}`);
     res.json({ state: "fail", message: err.message });
@@ -88,8 +88,15 @@ restaourantController.loginProcess = async (req, res) => {
 };
 
 restaourantController.logout = (req, res) => {
-  console.log("GET cont.logout");
-  res.send("logout sahifadasiz");
+  try {
+    console.log("GET cont/logout");
+    req.session.destroy(function () {
+      res.redirect("/resto");
+    });
+  } catch (err) {
+    console.log(`ERROR cont/logout ${err.message}`);
+    res.json({ state: "fail", message: err.message });
+  }
 };
 
 restaourantController.validateAuthRestaurant = (req, res, next) => {
