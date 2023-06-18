@@ -14,10 +14,10 @@ router_bssr.get("/", restaourantController.home);
 router_bssr
   .get("/sign-up", restaourantController.getSignupMyRestaourant)
   .post(
-    "/sign-up",
+    "/sign-up", 
     uploader_members.single("restaurant_img"),
     restaourantController.signupProcess
-  );
+  ); 
 router_bssr
   .get("/login", restaourantController.getLoginMyRestaourant)
   .post("/login", restaourantController.loginProcess);

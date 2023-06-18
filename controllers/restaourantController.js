@@ -14,7 +14,7 @@ restaourantController.home = (req, res) => {
     res.json({ state: "fail", message: err.message });
   }
 };
-
+ 
 restaourantController.getMyRestauranProducts = async (req, res) => {
   try {
     console.log("GET: cont/getMyRestauranProducts");
@@ -23,9 +23,9 @@ restaourantController.getMyRestauranProducts = async (req, res) => {
     res.render("restaurant-menu", { restaurant_data: data });
   } catch (err) {
     console.log(`ERROR cont/getMyRestauranProducts ${err.message}`);
-    res.json({ state: "fail", message: err.message });
-  }
-};
+    res.redirect('/resto');
+  } 
+};     
 
 restaourantController.getSignupMyRestaourant = async (req, res) => {
   try {
