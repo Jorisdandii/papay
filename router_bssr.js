@@ -36,7 +36,7 @@ router_bssr.post(
   restaourantController.validateAuthRestaurant,
   productController.updateChosenProduct
 );
-
+  
 router_bssr.get( 
   "/all-restaurant",
   restaourantController.validateAdmin,
@@ -44,3 +44,4 @@ router_bssr.get(
 );
 
 module.exports = router_bssr;
+  
