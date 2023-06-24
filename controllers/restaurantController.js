@@ -86,12 +86,12 @@ restaurantController.loginProcess = async (req, res) => {
     console.log(`ERROR cont/loginProcess ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
-}; 
- 
+};
+
 restaurantController.logout = (req, res) => {
   try {
     console.log("GET cont/logout");
-    req.session.destroy(function () { 
+    req.session.destroy(function () {
       res.redirect("/resto");
     });
   } catch (err) {
@@ -138,14 +138,13 @@ restaurantController.getAllRestaurants = async (req, res) => {
 
     const restaurant = new Restaurant();
     const restaurants_data = await restaurant.getAllRestaurantsData();
-    console.log("restaurants_data:", restaurants_data);
     res.render("all-restaurants", { restaurants_data: restaurants_data });
   } catch (err) {
     console.log(`ERROR cont/getAllRestaurants ${err.message}`);
     res.json({ state: "fail", message: err.message });
-  } 
-};  
-   
+  }
+};
+
 restaurantController.updateRestaurantByAdmin = async (req, res) => {
   try {
     console.log("GET cont/updateRestaurantByAdmin");
@@ -156,5 +155,4 @@ restaurantController.updateRestaurantByAdmin = async (req, res) => {
     console.log(`ERROR cont/updateRestaurantByAdmin ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
-}; 
-     
+};
