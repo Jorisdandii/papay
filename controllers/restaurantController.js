@@ -4,9 +4,9 @@ const Product = require("../models/Product");
 const Definer = require("../lib/mistake");
 const Restaurant = require("../models/Reataurant");
 
-let restaourantController = module.exports;
+let restaurantController = module.exports;
 
-restaourantController.home = (req, res) => {
+restaurantController.home = (req, res) => {
   try {
     console.log("GET: cont/home");
     res.render("home-page");
@@ -16,7 +16,7 @@ restaourantController.home = (req, res) => {
   }
 };
 
-restaourantController.getMyRestauranProducts = async (req, res) => {
+restaurantController.getMyRestauranProducts = async (req, res) => {
   try {
     console.log("GET: cont/getMyRestauranProducts");
     const product = new Product();
@@ -25,10 +25,10 @@ restaourantController.getMyRestauranProducts = async (req, res) => {
   } catch (err) {
     console.log(`ERROR cont/getMyRestauranProducts ${err.message}`);
     res.redirect("/resto");
-  }  
+  }
 };
- 
-restaourantController.getSignupMyRestaourant = async (req, res) => {
+
+restaurantController.getSignupMyRestaourant = async (req, res) => {
   try {
     console.log("GET: cont/getSignupMyRestaourant");
     res.render("signup");
@@ -38,7 +38,7 @@ restaourantController.getSignupMyRestaourant = async (req, res) => {
   }
 };
 
-restaourantController.signupProcess = async (req, res) => {
+restaurantController.signupProcess = async (req, res) => {
   try {
     console.log("POST: cont/signupProcess");
     assert(req.file, Definer.general_err3);
@@ -59,7 +59,7 @@ restaourantController.signupProcess = async (req, res) => {
   }
 };
 
-restaourantController.getLoginMyRestaourant = async (req, res) => {
+restaurantController.getLoginMyRestaourant = async (req, res) => {
   try {
     console.log("GET: cont/getLoginMyRestaourant");
     res.render("login-page");
@@ -69,7 +69,7 @@ restaourantController.getLoginMyRestaourant = async (req, res) => {
   }
 };
 
-restaourantController.loginProcess = async (req, res) => {
+restaurantController.loginProcess = async (req, res) => {
   try {
     console.log("POST: cont/loginProcess");
     const data = req.body,
@@ -86,12 +86,12 @@ restaourantController.loginProcess = async (req, res) => {
     console.log(`ERROR cont/loginProcess ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
-};
-
-restaourantController.logout = (req, res) => {
+}; 
+ 
+restaurantController.logout = (req, res) => {
   try {
     console.log("GET cont/logout");
-    req.session.destroy(function () {
+    req.session.destroy(function () { 
       res.redirect("/resto");
     });
   } catch (err) {
@@ -100,7 +100,7 @@ restaourantController.logout = (req, res) => {
   }
 };
 
-restaourantController.validateAuthRestaurant = (req, res, next) => {
+restaurantController.validateAuthRestaurant = (req, res, next) => {
   if (req.session?.member?.mb_type === "RESTAURANT") {
     req.member = req.session.member;
     next();
@@ -111,15 +111,15 @@ restaourantController.validateAuthRestaurant = (req, res, next) => {
     });
 };
 
-restaourantController.checkSessions = (req, res) => {
+restaurantController.checkSessions = (req, res) => {
   if (req.session?.member) {
-    res.json({ state: "succeed", data: req.session.member });
+    res.json({ state: "success", data: req.session.member });
   } else {
     res.json({ state: "fail", message: "You are not authenticated" });
   }
 };
 
-restaourantController.validateAdmin = (req, res, next) => {
+restaurantController.validateAdmin = (req, res, next) => {
   if (req.session?.member?.mb_type === "ADMIN") {
     req.member = req.session.member;
     next();
@@ -132,16 +132,29 @@ restaourantController.validateAdmin = (req, res, next) => {
   }
 };
 
-restaourantController.getAllRestaurants = async (req, res) => {
+restaurantController.getAllRestaurants = async (req, res) => {
   try {
     console.log("GET cont/getAllRestaurants");
 
     const restaurant = new Restaurant();
     const restaurants_data = await restaurant.getAllRestaurantsData();
-    console.log('data:', restaurants_data);
+    console.log("restaurants_data:", restaurants_data);
     res.render("all-restaurants", { restaurants_data: restaurants_data });
   } catch (err) {
     console.log(`ERROR cont/getAllRestaurants ${err.message}`);
     res.json({ state: "fail", message: err.message });
+  } 
+};  
+   
+restaurantController.updateRestaurantByAdmin = async (req, res) => {
+  try {
+    console.log("GET cont/updateRestaurantByAdmin");
+    const restaurant = new Restaurant();
+    const result = await restaurant.updateRestaurantByAdminData(req.body);
+    await res.json({ state: "success", data: result });
+  } catch (err) {
+    console.log(`ERROR cont/updateRestaurantByAdmin ${err.message}`);
+    res.json({ state: "fail", message: err.message });
   }
-};
+}; 
+     

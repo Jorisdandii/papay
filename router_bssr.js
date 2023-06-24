@@ -1,6 +1,6 @@
 const express = require("express");
 const router_bssr = express.Router();
-const restaourantController = require("./controllers/restaourantController");
+const restaurantController = require("./controllers/restaurantController");
 const productController = require("./controllers/productController");
 const uploader_product = require("./utils/upload-multer")("products");
 const uploader_members = require("./utils/upload-multer")("members");
@@ -9,39 +9,43 @@ const uploader_members = require("./utils/upload-multer")("members");
  *            BSSR EJS            *
  *********************************/
 
-router_bssr.get("/", restaourantController.home);
+router_bssr.get("/", restaurantController.home);
 
 router_bssr
-  .get("/sign-up", restaourantController.getSignupMyRestaourant)
+  .get("/sign-up", restaurantController.getSignupMyRestaourant)
   .post(
     "/sign-up",
     uploader_members.single("restaurant_img"),
-    restaourantController.signupProcess
+    restaurantController.signupProcess
   );
 router_bssr
-  .get("/login", restaourantController.getLoginMyRestaourant)
-  .post("/login", restaourantController.loginProcess);
-router_bssr.get("/logout", restaourantController.logout);
-router_bssr.get("/check-me", restaourantController.checkSessions);
+  .get("/login", restaurantController.getLoginMyRestaourant)
+  .post("/login", restaurantController.loginProcess);
+router_bssr.get("/logout", restaurantController.logout);
+router_bssr.get("/check-me", restaurantController.checkSessions);
 
-router_bssr.get("/products/menu", restaourantController.getMyRestauranProducts);
+router_bssr.get("/products/menu", restaurantController.getMyRestauranProducts);
 router_bssr.post(
   "/products/create",
-  restaourantController.validateAuthRestaurant,
+  restaurantController.validateAuthRestaurant,
   uploader_product.array("product_images", 5),
   productController.addNewProduct
 );
 router_bssr.post(
   "/products/edit/:id",
-  restaourantController.validateAuthRestaurant,
+  restaurantController.validateAuthRestaurant,
   productController.updateChosenProduct
 );
-  
-router_bssr.get( 
+
+router_bssr.get(
   "/all-restaurant",
-  restaourantController.validateAdmin,
-  restaourantController.getAllRestaurants
+  restaurantController.validateAdmin,
+  restaurantController.getAllRestaurants
 );
 
+router_bssr.post("/all-restaurant/edit", 
+  restaurantController.validateAdmin,
+  restaurantController.updateRestaurantByAdmin
+);
 module.exports = router_bssr;
    
