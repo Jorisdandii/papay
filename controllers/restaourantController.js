@@ -2,7 +2,7 @@ const assert = require("assert");
 const Member = require("../models/Member");
 const Product = require("../models/Product");
 const Definer = require("../lib/mistake");
-const { log } = require("console");
+const Restaurant = require("../models/Reataurant");
 
 let restaourantController = module.exports;
 
@@ -25,9 +25,9 @@ restaourantController.getMyRestauranProducts = async (req, res) => {
   } catch (err) {
     console.log(`ERROR cont/getMyRestauranProducts ${err.message}`);
     res.redirect("/resto");
-  }
+  }  
 };
-
+ 
 restaourantController.getSignupMyRestaourant = async (req, res) => {
   try {
     console.log("GET: cont/getSignupMyRestaourant");
@@ -127,18 +127,19 @@ restaourantController.validateAdmin = (req, res, next) => {
     const html = `<script>
           alert('Admin page: Permission denied!')
           window.location.replace('/resto')
-        </script>`;                 
+        </script>`;
     res.end(html);
   }
 };
 
-restaourantController.getAllRestaurants = (req, res) => {
+restaourantController.getAllRestaurants = async (req, res) => {
   try {
     console.log("GET cont/getAllRestaurants");
-    
-    // todo: hamma restaurantlarni dbdan choqiramiz
-    res.render('all-restaurants');
-    
+
+    const restaurant = new Restaurant();
+    const restaurants_data = await restaurant.getAllRestaurantsData();
+    console.log('data:', restaurants_data);
+    res.render("all-restaurants", { restaurants_data: restaurants_data });
   } catch (err) {
     console.log(`ERROR cont/getAllRestaurants ${err.message}`);
     res.json({ state: "fail", message: err.message });
