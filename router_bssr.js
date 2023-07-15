@@ -10,11 +10,11 @@ const uploader_members = require("./utils/upload-multer")("members");
  *********************************/
 
 router_bssr.get("/", restaurantController.home);
-
-router_bssr
+  
+router_bssr 
   .get("/sign-up", restaurantController.getSignupMyRestaourant)
-  .post(
-    "/sign-up",
+  .post( 
+    "/sign-up", 
     uploader_members.single("restaurant_img"),
     restaurantController.signupProcess
   );
@@ -36,8 +36,8 @@ router_bssr.post(
   restaurantController.validateAuthRestaurant,
   productController.updateChosenProduct
 );
-
-router_bssr.get(
+  
+router_bssr.get(   
   "/all-restaurant",
   restaurantController.validateAdmin,
   restaurantController.getAllRestaurants
